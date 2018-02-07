@@ -20,7 +20,6 @@
 //                            `=---='  
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 //                      佛祖保佑       永无BUG  
-
 const util = require('./utils/util.js')
 var vm = null
 App({
@@ -54,11 +53,12 @@ App({
             // vm.updateUserInfo()
             var param = {
               account_type: 'xcx',
-              open_id: openId,
+              xcx_openid: openId,
             }
             util.login(param, function (ret) {
               console.log("login1111:" + JSON.stringify(param));
               console.log("login:" + JSON.stringify(ret));
+              vm.updateUserInfo(function (ret) { })
               if (ret.data.code == "200") {
                 vm.storeUserInfo(ret.data.ret)
                 if (util.judgeIsAnyNullStr(ret.data.ret.nick_name)) {
@@ -83,7 +83,7 @@ App({
           gender: res.userInfo.gender,
           avatar: res.userInfo.avatarUrl,
         }
-        util.updateUserInfo(param, function (ret, err) {
+        util.updateUserById(param, function (ret, err) {
           console.log("updateUserInfo ret:" + JSON.stringify(ret))
           //更新缓存及globalData
           if (ret.data.code == "200") {

@@ -112,29 +112,54 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
       successCallback(res)
       hideLoading()
     },
-    fail: function () {
-      console.log("wxRequest fail:" + JSON.stringify())
+    fail: function (err) {
+      console.log("wxRequest fail:" + JSON.stringify(err))
       // errorCallback()
       hideLoading()
     }
   });
 }
 
-// http://localhost/waibaoSrv/public/api/ltwk/user/login
+//http://localhost/waibaoSrv/public/api/ltwk/apply/applyWK
+
+//申请王卡接口
+function applyWK(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/ltwk/apply/applyWK', param, "POST", successCallback, errorCallback);
+}
+
+//模糊搜索号码池中的未占用号码列表
+function getListBySearchWord(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/ltwk/phonenumPool/getListBySearchWord', param, "GET", successCallback, errorCallback);
+}
+
+//随机获取号码池中未占用号码列表
+function getRandomPhonenums(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/ltwk/phonenumPool/getRandomPhonenums', param, "GET", successCallback, errorCallback);
+}
+
+//获取位置
+function getAddress(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/ltwk/map/getAddress', param, "GET", successCallback, errorCallback);
+}
+
+//用户注册
+function register(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/ltwk/user/register', param, "POST", successCallback, errorCallback);
+}
+
+//更新用户信息
+function updateUserById(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/ltwk/user/updateById', param, "POST", successCallback, errorCallback);
+}
 
 //根据code获取用户openid
 function getOpenId(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/user/getXCXOpenId', param, "GET", successCallback, errorCallback);
+  wxRequest(SERVER_URL + '/ltwk/user/getXCXOpenId', param, "GET", successCallback, errorCallback);
 }
 
-//添加评论回复
+//登陆
 function login(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/ltwk/user/login', param, "POST", successCallback, errorCallback);
-}
-
-//删除订单
-function deleteTourOrder(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/order/deleteTourOrder', param, "GET", successCallback, errorCallback);
 }
 
 //返回
@@ -307,12 +332,15 @@ function imageUtil(e) {
   return imageSize;
 }
 
-
-
-
-
 module.exports = {
   INDEX_PAGE: "/pages/index/index",
   getOpenId: getOpenId, //获取openid
   login: login,  // login
+  register: register, //register 注册
+  judgeIsAnyNullStr: judgeIsAnyNullStr, //判断是否为空
+  updateUserById: updateUserById, //  更新用户信息根据id
+  getAddress:getAddress, //获取位置
+  getRandomPhonenums: getRandomPhonenums, //随机获取号码池中未占用号码列表
+  getListBySearchWord: getListBySearchWord, //模糊搜索号码池中的未占用号码列表
+  applyWK: applyWK, //申请王卡接口
 }

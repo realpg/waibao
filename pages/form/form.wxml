@@ -1,0 +1,124 @@
+<!--pages/form/form.wxml-->
+<view>
+  <view style='margin-left:40rpx;'>
+    <view style='margin-top:20rpx;'>已选择 “大王卡”</view>
+    <view style="font-size:14px;margin-top:30rpx;color:{{hintColor?'red':''}}">{{hint}}</view>
+    <view style='background-color:white;margin-left:-40rpx;margin-top:30rpx;'>
+       <view class="flex-row {{isNallName?'border-red':''}}"> 
+      <!-- <view class="flex-row border-red">       -->
+        <view style='font-size:35rpx;line-height:100rpx;padding-left:40rpx;width:200rpx;'>姓名</view>
+        <input placeholder-class='z-index' bindinput="getNameInput" style='height:100rpx;line-height:100rpx;' placeholder="请输入身份证件姓名" />
+      </view>
+      <view class='bar-2'></view>
+      <view class="flex-row {{isNallCode?'border-red':''}}">
+        <view style='font-size:35rpx;line-height:100rpx;padding-left:40rpx;width:200rpx;'>身份证</view>
+        <input placeholder-class='z-index' bindinput="getCodeInput" placeholder-class='z-index' style='height:100rpx;line-height:100rpx;' placeholder="请输入身份证号" />
+      </view>
+      <view class='bar-2'></view>
+      <view class="flex-row {{isNallTel?'border-red':''}}">
+        <view style='font-size:35rpx;line-height:100rpx;padding-left:40rpx;width:200rpx;'>联系电话</view>
+        <input bindinput="getTelInput" placeholder-class='z-index' style='height:100rpx;line-height:100rpx;' type='number' placeholder="请输入联系电话" />
+      </view>
+    </view>
+
+    <view style='margin-top:20rpx;'>请选择号码</view>
+    <view style='background-color:white;margin-left:-40rpx;margin-top:20rpx;'>
+      <view class='flex-row'>
+        <view style='font-size:35rpx;line-height:100rpx;padding-left:40rpx;width:200rpx;'>号码归属</view>
+        <view style='font-size:35rpx;color:#2D2D2D;height:100rpx;line-height:100rpx;'>{{province_gps}}-{{city_gps}}</view>
+        <!-- <input style='height:100rpx;line-height:100rpx;' placeholder="请输入联系电话" /> -->
+      </view>
+      <view class='bar-2'></view>
+      <view class="flex-row {{isNallChooseTel?'border-red':''}}">
+        <view style='font-size:35rpx;line-height:100rpx;padding-left:40rpx;width:200rpx;'>选择号码</view>
+        <view bindtap="showToast" style='width:550rpx;font-size:35rpx;color:#2D2D2D;height:100rpx;line-height:100rpx;'>{{chooseTel}}</view>
+      </view>
+    </view>
+
+    <view style='margin-top:20rpx;font-size:30rpx;margin-right:20rpx;'>
+      <text>请选择配送地址</text>
+      <text style='color:red;'> (支持全国配送，新疆、西藏仅限省内配送)</text>
+    </view>
+
+    <view style='background-color:white;margin-left:-40rpx;margin-top:20rpx;'>
+      <view class='flex-row'>
+        <view style='font-size:35rpx;line-height:100rpx;padding-left:40rpx;width:200rpx;'>所在地区</view>
+        <view bindtap="translate" style='width:550rpx;font-size:35rpx;color:#2D2D2D;height:100rpx;line-height:100rpx;'>{{province}}-{{city}}-{{county}}</view>
+        <!-- <input style='height:100rpx;line-height:100rpx;' placeholder="" /> -->
+      </view>
+      <view class='bar-2'></view>
+      <!-- <view></view> -->
+      <input class="{{isNallChooseTel?'border-red':''}}" bindinput="getAddresInput" placeholder-class='z-index' style='height:100rpx;line-height:100rpx;padding-left:40rpx;' placeholder="街道/镇+村/小区/写字楼+门牌号" />
+    </view>
+
+    <checkbox-group bindchange="bindAgreeChange">
+      <label class="weui-agree" for="weuiAgree">
+        <view class="weui-agree__text">
+          <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+          <view class="weui-agree__checkbox-icon">
+            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="16" wx:if="{{isAgree}}" color='#DAA861'></icon>
+          </view>
+          我已阅读并同意
+          <navigator url="" class="weui-agree__link">《客户入网服务协议》</navigator>
+        </view>
+      </label>
+    </checkbox-group>
+
+  </view>
+  <button wx:if="{{isAgree}}" bindtap='submit' style='background-color:#DAA861' type="primary">立即提交，免费送货上门</button>
+  <button wx:if="{{!isAgree}}" disabled="true" bindtap='submit' style='background-color:#DAA861' type="primary">立即提交，免费送货上门</button>
+  
+
+  <view style='margin:20rpx 30rpx;color:#9C9C9C;font-size:20rpx;'>请保持联系号码畅通，我们可能随时与您联系。本次为阶段性优惠活动，数量有限，联系电话无人接听或恶意下单情况，将不予发货。同一身份信息（身份证、联系方式等），只能参与一次，后申请的订单恕不发货。</view>
+  <view style='height:20rpx;'></view>
+
+  <view class="animation-element-wrapper {{showNumber ? 'hiddenScroll':''}}" style="visibility:{{showNumber ? 'visible':'hidden'}}" catchtap="hiddenNumber" data-id="444">
+    <view catchtap='sdafdasf' style='width:80%;margin:35% 10%;background-color:white;border-radius:10rpx;'>
+      <view class='flex-row center-style' style='border:1rpx solid #9C9C9C;width:80%;height:100rpx;margin:50rpx 10%;'>
+        <input style='height:100rpx;line-height:100rpx;margin-left:10rpx;width:380rpx;' type='number' placeholder="生日、幸运数字等" bindinput="getInput"></input>
+        <image src='../../images/search.png' bindtap='searchNumber' style='width:65rpx;height:65rpx;'></image>
+      </view>
+
+      <view style='width:92%;height:460rpx;margin:0 4%;'>
+        <block wx:for="{{telList}}">
+          <view catchtap='chooseTel' data-tel='{{item.phonenum}}' style='color:#89898B;float: left;margin-left:35rpx;'>{{item.phonenum}}</view>
+        </block>
+      </view>
+
+      <view class='bar-2'></view>
+
+      <button bindtap='getRandomPhonenums' style='width:100%;color:#57B336;'>换一批</button>
+
+    </view>
+  </view>
+
+  <view class="animation-element-wrapper" animation="{{animation}}" style="visibility:{{show ? 'visible':'hidden'}}" bindtap="hiddenFloatView" data-id="444">
+    <view class="animation-element" catchtap="nono">
+      <text class="left-bt city-text" catchtap="hiddenFloatView" data-id="555">取消</text>
+      <text class="right-bt city-text" catchtap="hiddenFloatView" data-id="666">确定</text>
+      <view class="line"></view>
+
+      <picker-view indicator-style="height: 50rpx;" value="{{value}}" bindchange="bindChange" catchtap="nono">
+        <!--省-->
+        <picker-view-column>
+          <view wx:for="{{provinces}}" wx:for-item="sheng" wx:key="">
+            {{sheng.name}}
+          </view>
+        </picker-view-column>
+        <!--地级市-->
+        <picker-view-column>
+          <view wx:for="{{citys}}" wx:key="">
+            {{item.name}}
+          </view>
+        </picker-view-column>
+        <!--区县-->
+        <picker-view-column>
+          <view wx:for="{{countys}}" wx:key="">
+            {{item.name}}
+          </view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+
+</view>

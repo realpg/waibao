@@ -1,17 +1,62 @@
-<!--index.wxml-->
-<!-- <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view> -->
+<scroll-view scroll-y="true" bindscroll="scroll" scroll-top="{{scrollTop}}" bindscrolltolower="getMore" style="position:absolute; top:0; left:0; right:0; bottom:0;">
+  <view class="page">
+    <view class="page__bd page__bd_spacing">
+      <view class="weui-flex">
+        <view class="weui-flex__item" style="width:100%;height:8413rpx;background-image:url('http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.d7fa2f259e74bb4376316f99653b006b.png');background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;">
+          <view class="placeholder">　</view>
+          <view class="placeholder">
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.7d2788d316960e203639d39258a49fbf.png" style="width:100%;height:42rpx;margin-top:89%">
+            </image>
+          </view> 
+          <view>
+            <!-- 按钮左 -->
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.400c25f6f04a3c9b82bd5be303077c65.png" class="yy1" bindtap="click"></image>
+            <!-- 大王卡大 -->
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.a23a54a04b76caeea870d6ddebe95fe6.png" class="zjz" hidden='{{show}}'></image>
+            <!-- 天王卡小 -->
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.7511013eb409d75112539535e214a93e.png" class="zjy2" hidden='{{show}}'></image>
+            <!-- 大王卡小 -->
+             <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.af62c06417214269bdeb26fd8398641d.png" class="zjy" hidden='{{!show}}'></image>
+            <!-- 天王卡大 -->
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.6720b39ad393ccbd137b06e4001088f4.png" class="zjz2" hidden='{{!show}}'></image> 
 
-<view class='background-img'>
-
-</view>
+            <!-- 按钮右 -->
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.31fcafa1ee4501c7b02f36b94e7cbea6.png" class="yy2" bindtap="click"></image>
+          </view> 
+          <view class="placeholder">
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.9ccaedfb5269d8a4b673c83963af8c41.png" class="lj" bindtap='jumpsubmit'>
+            </image>
+          </view>
+          <view class="placeholder">
+            <text class="zf" bindtap="goTop2">资费详情</text>
+          </view>
+          <view class="placeholder">
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.6a917d0f9cb6c1cc0e8aca2378a2a13a.png" class="d1"></image>
+          </view>
+          <view class="placeholder">
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.4f4c42be3fc57a6e8b66113b0ee1260c.png" class="d2"></image>
+          </view>
+          <view class="placeholder">
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.e5cf174dc33bc16a838744dc8d641729.png" class="d3"></image>
+          </view>
+          <view class="placeholder">
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.d2341a3ebbd92283b6ce8c380d2968bf.png" class="d4"></image>
+          </view>
+          <view class="dd">
+          </view>
+          <!-- 返回顶部 -->
+          <view class="widget-goTop" bindtap="goTop" wx:if="{{ floorstatus }}">
+            <image class="fhdb" src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.6749a5bb8ec7d63e3a28a1ced7cdaa1a.png"></image>
+          </view>
+          <!-- 返回顶部结束 -->
+          <!--  底部 -->
+          <view class="widget-goTop2" wx:if="{{ floorstatus }}"></view>
+          <view class="widget-goTop3" wx:if="{{ floorstatus }}">
+            <image src="http://dsyy.isart.me/tmp/wxa648f7ba502a5e59.o6zAJs3FFzas02nMmUHEIaQsPMXk.9ccaedfb5269d8a4b673c83963af8c41.png" class="lj2"></image>
+          </view>
+          <!--  底部结束 -->
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
